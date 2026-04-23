@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import { de } from 'date-fns/locale'
 import { supabase } from '../lib/supabase'
@@ -220,6 +220,7 @@ function Row({ label, value }: { label: string; value: string }) {
 // ─── Tab: Angebote ───────────────────────────────────────────────────────────
 
 function OffersTab({ event, onRefresh }: { event: EventDetail; onRefresh: () => void }) {
+  const navigate = useNavigate()
   const [showCreate, setShowCreate] = useState(false)
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
@@ -278,6 +279,14 @@ function OffersTab({ event, onRefresh }: { event: EventDetail; onRefresh: () => 
                 <span className="text-sm font-semibold text-gray-900 tabular-nums">
                   {eur(Math.round(offer.total_net_cents * (1 + offer.tax_rate_pct / 100)))} brutto
                 </span>
+                {offer.status === 'entwurf' && (
+                  <button
+                    onClick={e => { e.stopPropagation(); navigate(`/quotes/${offer.id}/edit`) }}
+                    className="px-2.5 py-1 bg-indigo-600 text-white rounded text-xs font-medium hover:bg-indigo-700 shrink-0"
+                  >
+                    Im Editor öffnen
+                  </button>
+                )}
                 <span className="text-gray-400 text-sm">{expandedId === offer.id ? '▲' : '▼'}</span>
               </div>
             </div>

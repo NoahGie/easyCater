@@ -11,6 +11,7 @@ import { CalendarPage } from './pages/CalendarPage'
 import { CatalogPage } from './pages/CatalogPage'
 import { StaffPage } from './pages/StaffPage'
 import { EquipmentPage } from './pages/EquipmentPage'
+import { QuoteEditorPage } from './pages/QuoteEditorPage'
 import { Layout } from './components/Layout'
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="calendar" element={<CalendarPage />} />
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailPage />} />
+            <Route path="quotes/:offerId/edit" element={<QuoteEditorPage />} />
             <Route path="customers" element={<CustomersPage />} />
             <Route path="customers/:id" element={<CustomerDetailPage />} />
             <Route path="catalog" element={<CatalogPage />} />
