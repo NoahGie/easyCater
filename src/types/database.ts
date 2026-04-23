@@ -36,7 +36,7 @@ export type StaffRole =
   | 'management'
   | 'sonstiges'
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       profiles: {
@@ -66,6 +66,7 @@ export interface Database {
           phone?: string | null
           updated_at?: string
         }
+        Relationships: []
       }
       catalog_categories: {
         Row: {
@@ -88,6 +89,7 @@ export interface Database {
           description?: string | null
           sort_order?: number
         }
+        Relationships: []
       }
       catalog_items: {
         Row: {
@@ -135,6 +137,7 @@ export interface Database {
           metadata?: Record<string, unknown> | null
           updated_at?: string
         }
+        Relationships: []
       }
       customers: {
         Row: {
@@ -179,6 +182,7 @@ export interface Database {
           is_repeat_client?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       customer_contacts: {
         Row: {
@@ -212,6 +216,15 @@ export interface Database {
           is_primary?: boolean
           notes?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "customer_contacts_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       events: {
         Row: {
@@ -268,6 +281,15 @@ export interface Database {
           assigned_to?: string | null
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "events_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       offers: {
         Row: {
@@ -313,6 +335,15 @@ export interface Database {
           accepted_at?: string | null
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "offers_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       offer_items: {
         Row: {
@@ -349,6 +380,15 @@ export interface Database {
           unit?: string
           unit_price_cents?: number
         }
+        Relationships: [
+          {
+            foreignKeyName: "offer_items_offer_id_fkey"
+            columns: ["offer_id"]
+            isOneToOne: false
+            referencedRelation: "offers"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       staff_members: {
         Row: {
@@ -394,6 +434,7 @@ export interface Database {
           is_active?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       equipment_items: {
         Row: {
@@ -439,6 +480,7 @@ export interface Database {
           is_active?: boolean
           updated_at?: string
         }
+        Relationships: []
       }
       event_staff: {
         Row: {
@@ -473,6 +515,22 @@ export interface Database {
           confirmed?: boolean
           notes?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "event_staff_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_staff_staff_member_id_fkey"
+            columns: ["staff_member_id"]
+            isOneToOne: false
+            referencedRelation: "staff_members"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       invoices: {
         Row: {
@@ -525,6 +583,15 @@ export interface Database {
           pdf_url?: string | null
           updated_at?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: Record<string, never>
@@ -535,6 +602,9 @@ export interface Database {
       invoice_status: InvoiceStatus
       catalog_item_type: CatalogItemType
       staff_role: StaffRole
+    }
+    CompositeTypes: {
+      [_ in never]: never
     }
   }
 }

@@ -4,6 +4,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { LoginPage } from './pages/LoginPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { EventsPage } from './pages/EventsPage'
+import { EventDetailPage } from './pages/EventDetailPage'
 import { CustomersPage } from './pages/CustomersPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { CatalogPage } from './pages/CatalogPage'
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="calendar" element={<CalendarPage />} />
             <Route path="events" element={<EventsPage />} />
+            <Route path="events/:id" element={<EventDetailPage />} />
             <Route path="customers" element={<CustomersPage />} />
             <Route path="catalog" element={<CatalogPage />} />
             <Route path="staff" element={<StaffPage />} />
