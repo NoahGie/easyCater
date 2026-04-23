@@ -6,6 +6,7 @@ import { DashboardPage } from './pages/DashboardPage'
 import { EventsPage } from './pages/EventsPage'
 import { EventDetailPage } from './pages/EventDetailPage'
 import { CustomersPage } from './pages/CustomersPage'
+import { CustomerDetailPage } from './pages/CustomerDetailPage'
 import { CalendarPage } from './pages/CalendarPage'
 import { CatalogPage } from './pages/CatalogPage'
 import { StaffPage } from './pages/StaffPage'
@@ -32,6 +33,7 @@ export default function App() {
             <Route path="events" element={<EventsPage />} />
             <Route path="events/:id" element={<EventDetailPage />} />
             <Route path="customers" element={<CustomersPage />} />
+            <Route path="customers/:id" element={<CustomerDetailPage />} />
             <Route path="catalog" element={<CatalogPage />} />
             <Route path="staff" element={<StaffPage />} />
             <Route path="equipment" element={<EquipmentPage />} />
